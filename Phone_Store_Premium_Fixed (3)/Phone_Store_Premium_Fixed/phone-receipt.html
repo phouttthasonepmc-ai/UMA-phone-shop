@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UMA SHOP PHONE - ບິນສິນຄ້າ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Lao:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Noto Sans Lao', sans-serif;
+    }
+    body {
+      background: radial-gradient(circle at top right, #ffffff, #f5f5f7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      color: #1d1d1f;
+    }
+    .receipt-container {
+      background: #ffffff;
+      width: 100%;
+      max-width: 450px;
+      padding: 40px;
+      border-radius: 24px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+      position: relative;
+      overflow: hidden;
+    }
+    .receipt-header {
+      text-align: center;
+      margin-bottom: 30px;
+      border-bottom: 2px dashed #e5e7eb;
+      padding-bottom: 20px;
+    }
+    .brand-name {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #e30000;
+      letter-spacing: 1px;
+      margin-bottom: 5px;
+    }
+    .receipt-title {
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #64748b;
+    }
+    .meta-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-bottom: 20px;
+    }
+    .customer-box {
+      background: #f8fafc;
+      padding: 12px 15px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      color: #334155;
+      margin-bottom: 20px;
+      line-height: 1.6;
+      border-left: 4px solid #e30000;
+    }
+    .item-list {
+      margin-bottom: 25px;
+    }
+    .item-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      font-size: 0.95rem;
+    }
+    .item-name {
+      color: #334155;
+      font-weight: 500;
+    }
+    .item-price {
+      color: #1d1d1f;
+      font-weight: 600;
+    }
+    .summary-section {
+      border-top: 2px dashed #e5e7eb;
+      padding-top: 20px;
+      margin-bottom: 30px;
+    }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+      color: #64748b;
+    }
+    .summary-row.total {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #1d1d1f;
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid #f1f5f9;
+    }
+    .summary-row.total .price {
+      color: #e30000;
+    }
+    .receipt-footer {
+      text-align: center;
+      color: #94a3b8;
+      font-size: 0.85rem;
+      margin-top: 20px;
+    }
+    
+    /* ⬇️ ປັບແຕ່ງປຸ່ມຕ່າງໆ ⬇️ */
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 30px;
+    }
+    .btn-print {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 14px;
+      background: #e30000;
+      color: #ffffff;
+      text-align: center;
+      font-weight: 600;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(227, 0, 0, 0.2);
+    }
+    .btn-print:hover {
+      background: #cc0000;
+      transform: translateY(-2px);
+    }
+    .btn-done {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 14px;
+      background: #f1f5f9;
+      color: #475569;
+      text-align: center;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 12px;
+      font-size: 1rem;
+      transition: all 0.2s ease;
+    }
+    .btn-done:hover {
+      background: #e2e8f0;
+      color: #1e293b;
+    }
+
+    /* 🚨 ໂຄ້ດຈັດການເວລາສັ່ງປິ້ນ (Print Media CSS) 🚨 */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        padding: 0 !important;
+      }
+      .receipt-container {
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        max-width: 100% !important;
+      }
+      /* ເຊື່ອງປຸ່ມທັງໝົດ ບໍ່ໃຫ້ຕິດອອກມາໃນໃບບິນເວລາປິ້ນແທ້ */
+      .btn-group {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="receipt-container">
+    <div class="receipt-header">
+      <div class="brand-name">UMA SHOP PHONE</div>
+      <div class="receipt-title">ໃບບິນຮັບເງິນ / Receipt</div>
+    </div>
+
+    <div class="meta-info">
+      <span id="bill-no">ບິນເລກທີ: Loading...</span>
+      <span id="bill-date">ວັນທີ: Loading...</span>
+    </div>
+
+    <div class="customer-box" id="customer-details">
+      </div>
+
+    <div class="item-list" id="items-container">
+      </div>
+
+    <div class="summary-section">
+      <div class="summary-row">
+        <span>ລາຄາລວມ (Subtotal)</span>
+        <span id="full-price">0 Kip</span>
+      </div>
+      <div class="summary-row">
+        <span>ສ່ວນຫຼຸດ (Discount)</span>
+        <span id="discount-price" style="color: #16a34a;">-0 Kip</span>
+      </div>
+      <div class="summary-row total">
+        <span>ຍອດຊຳລະທັງໝົດ</span>
+        <span class="price" id="final-price">0 Kip</span>
+      </div>
+    </div>
+
+    <div class="receipt-footer">
+      <p>🙏 ຂອບໃຈທີ່ໃຊ້ບໍລິການກັບທາງຮ້ານ UMA SHOP 🙏</p>
+      <p style="font-size: 0.75rem; margin-top: 5px; color: #cbd5e1;">Powered by Phoutthasone</p>
+    </div>
+
+    <div class="btn-group">
+      <button class="btn-print" onclick="triggerPrint()">
+        <i class="fa-solid fa-print" style="margin-right: 8px;"></i> ພິມໃບບິນ (Print)
+      </button>
+      <a class="btn-done" href="team.html">
+        <i class="fa-solid fa-house" style="margin-right: 8px;"></i> ກັບຄືນໜ້າຫຼັກ
+      </a>
+    </div>
+  </div>
+
+<script>
+    // ຟັງຊັນສັ່ງປິ້ນໃບບິນ
+    function triggerPrint() {
+        window.print();
+    }
+
+    // ສຸ່ມເລກບິນ
+    document.getElementById('bill-no').innerText = "ບິນເລກທີ: #" + Math.floor(100000 + Math.random() * 900000);
+
+    const itemsContainer = document.getElementById('items-container');
+    const billDateEl = document.getElementById('bill-date');
+    const customerDetailsEl = document.getElementById('customer-details');
+
+    // ດຶງຂໍ້ມູນການຊື້ຈາກ LocalStorage
+    const rawData = localStorage.getItem('phoneOrder');
+
+    if (!rawData) {
+        itemsContainer.innerHTML = '<p style=\"text-align:center; color:#64748b; padding:20px;\">ບໍ່ພົບຂໍ້ມູນການສັ່ງຊື້.</p>';
+        customerDetailsEl.style.display = 'none';
+    } else {
+        const order = JSON.parse(rawData);
+        
+        // 1. ສະແດງວັນທີເວລາ
+        billDateEl.innerText = "ວັນທີ: " + order.date;
+
+        // 2. ສະແດງຂໍ້ມູນລູກຄ້າ ຊື່ ແລະ ເບີໂທ
+        if (order.customerName && order.customerPhone) {
+            customerDetailsEl.innerHTML = `
+                <div><i class="fa-solid fa-user" style="color: #e30000; margin-right: 6px;"></i> <strong>ຊື່ລູກຄ້າ:</strong> ${order.customerName}</div>
+                <div><i class="fa-solid fa-phone" style="color: #64748b; margin-right: 6px;"></i> <strong>ເບີໂທລະສັບ:</strong> ${order.customerPhone}</div>
+            `;
+        } else {
+            customerDetailsEl.innerHTML = `<div><i class="fa-solid fa-exclamation-triangle" style="color:red;"></i> ບໍ່ມີຂໍ້ມູນຜູ້ຊື້</div>`;
+        }
+
+        // 3. ວົນ Loop ສະແດງລາຍການສິນຄ້າ
+        itemsContainer.innerHTML = order.items.map(item => `
+            <div class="item-row">
+                <span class="item-name">${item.name}</span>
+                <span class="item-price">${item.price.toLocaleString()} Kip</span>
+            </div>
+        `).join('');
+        
+        // 4. ສະແດງລາຄາເຕັມ, ສ່ວນຫຼຸດ ແລະ ລາຄາສຸດທ້າຍ
+        document.getElementById('full-price').innerText = order.total.toLocaleString() + " Kip";
+        document.getElementById('discount-price').innerText = "- " + order.discount.toLocaleString() + " Kip";
+        document.getElementById('final-price').innerText = order.finalTotal.toLocaleString() + " Kip";
+    }
+</script>
+</body>
+</html>
