@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone Hub - Premium Online Store</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="site-brand">UMA SHOP PHONE</div>
+        <nav class="site-nav">
+            <a href="#home">Home</a>
+            <a href="#models">Shop</a>
+            <a href="#cart-section" class="cart-icon-wrapper">
+                <i class="fa-solid fa-cart-shopping"></i> ກະຕ່າ (<span id="cart-count">0</span>)
+            </a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="hero-copy">
+                <span class="eyebrow">ຂາຍແຕ່ໂທລະສັບເຮືອທົງ</span>
+                <h1 class="hero-title">Lວຍບໍ່ໄຫວແລ້ວ <br>ຂາຍໃຫ້ແຕ່ຄົນLວຍ</h1>
+                <p class="hero-copy-text">ຫວັງວ່າທ່ານຈະມີຄວາມສຸກກັບການບໍລິການສຸດ P ມຽມຂອງເຮົາ.</p>
+                <a class="button" href="#models">ເລີ່ມຊື້ໄດ້ເລີຍ</a>
+            </div>
+            <div class="hero-image">
+                <img src="https://media.tenor.com/ypD7hIpIFIkAAAAe/phone-plate.png" alt="Phone Hub Hero Image">
+            </div>
+        </section>
+
+        <section class="section-block" id="models">
+            <span class="section-title">ມີແຕ່ 10 ລຸ້ນເພາະງົບຫນ້ອຍ</span>
+            <div class="brand-filter-container">
+                <div class="brand-item active" onclick="filterBrand(event, 'all')">
+                    <div class="brand-circle"><i class="fa-solid fa-border-all"></i></div>
+                    <span>ທັງໝົດ</span>
+                </div>
+                <div class="brand-item" onclick="filterBrand(event, 'Iphone')">
+                    <div class="brand-circle"><i class="fa-brands fa-apple"></i></div>
+                    <span>Apple</span>
+                </div>
+                <div class="brand-item" onclick="filterBrand(event, 'Samsung')">
+                    <div class="brand-circle"><i class="fa-solid fa-mobile-screen"></i></div>
+                    <span>Samsung</span>
+                </div>
+                <div class="brand-item" onclick="filterBrand(event, 'Xiaomi')">
+                    <div class="brand-circle"><i class="fa-solid fa-m"></i></div>
+                    <span>Xiaomi</span>
+                </div>
+                <div class="brand-item" onclick="filterBrand(event, 'Vivo')">
+                    <div class="brand-circle"><i class="fa-solid fa-v"></i></div>
+                    <span>Vivo</span>
+                </div>
+                <div class="brand-item" onclick="filterBrand(event, 'Oppo')">
+                    <div class="brand-circle"><i class="fa-solid fa-o"></i></div>
+                    <span>Oppo</span>
+                </div>
+            </div>
+
+            <div class="car-list" id="phone-container"></div>
+        </section>
+
+        <section class="section-block" id="cart-section">
+            <span class="section-title">ກະຕ່າຂອງທ່ານ</span>
+            
+            <div class="cart-container">
+                <div id="cart-items">
+                    <p class="empty-msg">ກະລຸນາເລືອກໂທລະສັບໃສ່ກະຕ່າ.</p>
+                </div>
+                
+                <div class="cart-summary">
+                    <div class="discount-section">
+                        <div class="discount-controls">
+                            <input type="text" id="discountInput" placeholder="ໃສ່ໂຄ້ດສ່ວນຫຼຸດ">
+                            <button onclick="checkDiscount()">ກວດສອບ</button>
+                        </div>
+                        <p id="discountResult" style="font-size: 0.9rem; text-align: center; margin-top: 5px;"></p>
+                    </div>
+
+                    <div class="customer-info-box">
+                        <h4 class="info-box-title"><i class="fa-solid fa-user-shield"></i> ຂໍ້ມູນຜູ້ສັ່ງຊື້</h4>
+                        <div class="input-field">
+                            <i class="fa-solid fa-user"></i>
+                            <input type="text" id="customerName" placeholder="ກະລຸນາໃສ່ຊື່ຂອງທ່ານ..." required>
+                        </div>
+                        <div class="input-field">
+                            <i class="fa-solid fa-phone"></i>
+                            <input type="tel" id="customerPhone" placeholder="ກະລຸນາໃສ່ເບີໂທລະສັບ..." required>
+                        </div>
+                    </div>
+
+                    <div class="summary-row">
+                        <span>ລາຄາລວມ:</span>
+                        <span id="cart-total">0 Kip</span>
+                    </div>
+
+                    <button class="button checkout-btn" onclick="checkout()">ຊື້ເລີຍ</button>
+                </div>
+            </div> 
+        </section>
+    </main>
+
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <div class="modal-body">
+                <img id="modalImg" src="" alt="Phone Image">
+                <div class="modal-info">
+                    <h2 id="modalTitle">Phone Details</h2>
+                    <p id="modalDescription">Description goes here...</p>
+                    <p class="modal-price" id="modalPrice">K0</p>
+                    <button class="button" id="modalAddBtn">ເພີ່ມໃສ່ກະຕ່າ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
